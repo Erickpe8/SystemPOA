@@ -1,67 +1,128 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏛️ SystemPOA – Sistema Institucional para la Gestión del Plan Operativo Anual (Monolito Modular Laravel)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Contexto Institucional
 
-## About Laravel
+El **SystemPOA** es un desarrollo institucional de la **Fundación de Estudios Superiores Comfanorte (FESC)**, liderado por la **Unidad de Desarrollo de Software**, con el propósito de apoyar la **gestión, seguimiento y evaluación del Plan Operativo Anual (POA)**.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Este sistema nace como respuesta a la necesidad de **digitalizar y automatizar** los procesos de planeación institucional, alineados con el **Plan Estratégico FESC 2023–2028** y bajo el enfoque del **modelo PHVA (Planear, Hacer, Verificar, Actuar)**.  
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+El objetivo general es ofrecer una herramienta que permita consolidar la información de los procesos institucionales, fortalecer la trazabilidad de los avances y facilitar el control del cumplimiento de metas y objetivos de los diferentes niveles administrativos.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Propósito del Proyecto
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+El SystemPOA busca unificar la formulación, ejecución y evaluación del POA institucional dentro de una misma plataforma, permitiendo a las dependencias y programas académicos registrar, supervisar y evidenciar sus avances de forma estructurada, auditada y alineada con los **pilares estratégicos** del plan de desarrollo institucional.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Alineación con los Pilares Estratégicos FESC 2023–2028
 
-## Laravel Sponsors
+El sistema estará orientado a los **cinco pilares fundamentales** definidos por la FESC, sirviendo como herramienta de medición y seguimiento para cada uno:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. **Gestión Académica e Investigación.**  
+2. **Gestión Administrativa y Financiera.**  
+3. **Gestión del Talento Humano.**  
+4. **Gestión de Bienestar Universitario.**  
+5. **Gestión de Proyección Social y Extensión.**
 
-### Premium Partners
+Cada pilar representará una estructura de metas, objetivos e indicadores específicos, cuya evolución trimestral será registrada en el sistema por los responsables de área y los equipos de apoyo designados.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+## Estructura Conceptual del Sistema
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+El SystemPOA implementará una **arquitectura monolítica modular**, construida en **Laravel 10**, donde cada módulo agrupará sus propias entidades, controladores, servicios, vistas y rutas.
 
-## Code of Conduct
+La modularidad permitirá mantener independencia entre las áreas funcionales del sistema, garantizando una estructura escalable y organizada, sin recurrir a un desacoplamiento total entre backend y frontend.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Capas principales:
+- **Domain:** Entidades, reglas de negocio e interfaces de persistencia.  
+- **Application:** Casos de uso, validaciones y servicios de aplicación.  
+- **Infrastructure:** Repositorios, manejo de archivos, utilidades internas y servicios externos.  
+- **Interfaces (HTTP):** Controladores, policies, requests, vistas Blade y rutas.
 
-## Security Vulnerabilities
+### Ejemplo de organización modular:
+```
+modules/
+│
+├── Core/
+│   ├── Http/
+│   ├── Models/
+│   ├── Services/
+│   ├── Database/
+│   └── routes.php
+│
+├── Formulacion/
+│   ├── Http/
+│   ├── Models/
+│   ├── Services/
+│   ├── Database/
+│   └── routes.php
+│
+├── Seguimiento/
+│   ├── Http/
+│   ├── Models/
+│   ├── Services/
+│   ├── Database/
+│   └── routes.php
+│
+└── Evaluacion/
+    ├── Http/
+    ├── Models/
+    ├── Services/
+    ├── Database/
+    └── routes.php
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Cada módulo gestionará sus propios datos, lógica y control de accesos, permitiendo mantener una clara separación de responsabilidades dentro del monolito.
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# SystemPOA
+## Alcance Institucional
+
+- Digitalización del proceso de formulación del POA institucional.  
+- Estandarización de la información asociada a pilares, objetivos, alcances, metas e indicadores.  
+- Seguimiento y evaluación trimestral centralizada.  
+- Registro de evidencias institucionales.  
+- Control de acceso según perfiles y dependencias.  
+- Auditoría de los procesos y trazabilidad de cambios.
+
+---
+
+## Roles Institucionales y Responsabilidades
+
+El proyecto contará con una estructura de roles inspirada en la organización real del proceso POA, tanto en la operación del sistema como en su desarrollo técnico.
+
+
+### Roles del equipo de desarrollo (FESC):
+Todos los integrantes participan con el mismo nivel de responsabilidad técnica como **Desarrolladores Full**, compartiendo la construcción del sistema en sus componentes funcionales, arquitectónicos y visuales.
+
+| Nombre | Rol | Responsabilidad |
+|---------|-----|-----------------|
+| **Erick Sebastián Pérez Carvajal** | Desarrollador Full | Arquitectura, desarrollo integral y soporte técnico. |
+| **Santiago Rueda Quintero** | Desarrollador Full | Desarrollo integral, diseño y optimización de vistas. |
+| **Yeison Rolón** | Desarrollador Full | Desarrollo integral, control de calidad y soporte técnico. |
+
+**Supervisión Institucional:**  
+- **Ing. Jesús Antonio Figueroa Guerrero** – Director del Programa de Ingeniería de Software – FESC.  
+
+---
+
+## Stack Base del Proyecto
+
+- **Framework:** Laravel 10.x  
+- **Lenguaje:** PHP 8.2+  
+- **Base de datos:** MySQL 8.x  
+- **Frontend:** Blade + TailwindCSS 3.x  
+- **Autenticación:** Laravel Breeze  
+- **Gestión de roles y permisos:** Spatie Laravel Permission  
+- **Procesamiento de imágenes:** Intervention Image  
+- **Testing:** PHPUnit  
+
+---
+
+## Licencia y Propiedad Institucional
+
+El SystemPOA es un proyecto de desarrollo institucional bajo licencia **FESC – Unidad de Desarrollo de Software**.  
+El uso, redistribución o comercialización fuera de los fines académicos y administrativos de la institución está restringido sin autorización escrita.
