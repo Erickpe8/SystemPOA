@@ -27,10 +27,19 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        if (!auth()->user()->is_active) {
+            Auth::logout();
+
+            return redirect()->route('login')->withErrors([
+                'email' => 'Su cuenta aún no ha sido validada por el área de infraestructura.',
+            ]);
+        }
+
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
+
 
     /**
      * Destroy an authenticated session.
