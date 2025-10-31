@@ -5,3 +5,54 @@
 @import "flowbite/src/themes/default";
 @plugin "flowbite/plugin";
 @source "../../node_modules/flowbite";
+
+/* LIGHT */
+:root,
+:root[data-theme='light']{
+    --bg: #EEEEEE;
+    --text: #1D1616;
+    --primary: #8E1616;
+    --accent: #D84040;
+    --card: rgba(255,255,255,0.90);
+    --border: rgba(142,22,22,0.30);
+
+    --brand-red-1: #e30513;
+    --brand-red-2: #9c0f06;
+    --brand-red-3: #630b00;
+    --anthracite: #3c3c3b;
+
+    --gray-0:  #FFFFFF;  /* 0% negro */
+    --gray-10: #E6E6E6;  /* 10% negro */
+
+    --focus: #D84040;
+    --muted: color-mix(in oklab, var(--text) 60%, transparent);
+}
+
+/* DARK */
+:root[data-theme='dark']{
+    --bg: #1D1616;
+    --text: #EEEEEE;
+    --primary: #8E1616;
+    --accent: #D84040;
+    --card: rgba(29,22,22,0.70);
+    --border: rgba(142,22,22,0.40);
+
+    --brand-red-1: #e30513;
+    --brand-red-2: #9c0f06;
+    --brand-red-3: #630b00;
+    --anthracite: #3c3c3b;
+
+    --gray-0:  #FFFFFF;
+    --gray-10: #E6E6E6;
+
+    --focus: #D84040;
+    --muted: color-mix(in oklab, var(--text) 60%, transparent);
+}
+
+.theme-bg   { background-color: var(--bg); }
+.theme-text { color:            var(--text); }
+.theme-card { background-color: var(--card); }
+.theme-bd   { border-color:     var(--border); }
+
+/* Puede seguir usando utilidades Tailwind de valores arbitrarios:
+   bg-[var(--bg)] text-[var(--text)] border-[color:var(--border)] */
