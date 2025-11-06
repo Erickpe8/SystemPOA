@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-3">
-            <a href="{{ route('dashboard') }}" class="text-[var(--text)]/60 hover:text-[var(--accent)] transition-colors">
+            <a href="{{ route('dashboard') }}" class="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -11,7 +11,7 @@
                 <h2 class="font-semibold text-2xl text-[var(--text)] leading-tight">
                     Privacidad de Datos
                 </h2>
-                <p class="mt-1 text-sm text-[var(--text)]/60">
+                <p class="mt-1 text-sm text-[var(--text-muted)]">
                     Política de protección de datos personales
                 </p>
             </div>
@@ -35,7 +35,7 @@
                         </div>
                         <div>
                             <h1 class="text-2xl font-bold text-[var(--text)]">Política de Privacidad</h1>
-                            <p class="text-sm text-[var(--text)]/60 mt-1">
+                            <p class="text-sm text-[var(--text-muted)] mt-1">
                                 Última actualización: {{ date('d/m/Y') }}
                             </p>
                         </div>
@@ -47,7 +47,7 @@
                     <div class="space-y-6">
                         <!-- Introducción -->
                         <div class="p-4 rounded-lg bg-[var(--accent)]/10 border border-[var(--accent)]/30">
-                            <p class="text-sm text-[var(--text)]/70 leading-relaxed">
+                            <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
                                 En FESC nos comprometemos a proteger la privacidad y seguridad de los datos personales
                                 de nuestros usuarios, en cumplimiento con la Ley 1581 de 2012 de Protección de Datos
                                 Personales de Colombia.
@@ -63,7 +63,7 @@
                                 </span>
                                 Información que Recopilamos
                             </h2>
-                            <div class="text-[var(--text)]/70 leading-relaxed space-y-3">
+                            <div class="text-[var(--text-secondary)] leading-relaxed space-y-3">
                                 <p>Recopilamos la siguiente información:</p>
 
                                 <div class="space-y-2">
@@ -121,7 +121,7 @@
                                 </span>
                                 Uso de la Información
                             </h2>
-                            <div class="text-[var(--text)]/70 leading-relaxed space-y-2">
+                            <div class="text-[var(--text-secondary)] leading-relaxed space-y-2">
                                 <p>Utilizamos su información para:</p>
                                 <ul class="list-disc list-inside space-y-1 ml-4">
                                     <li>Proporcionar acceso y funcionalidad del sistema</li>
@@ -142,7 +142,7 @@
                                 </span>
                                 Protección de Datos
                             </h2>
-                            <div class="text-[var(--text)]/70 leading-relaxed space-y-2">
+                            <div class="text-[var(--text-secondary)] leading-relaxed space-y-2">
                                 <p>Implementamos medidas de seguridad para proteger su información:</p>
                                 <ul class="list-disc list-inside space-y-1 ml-4">
                                     <li>Encriptación de datos sensibles</li>
@@ -163,7 +163,7 @@
                                 </span>
                                 Derechos del Titular
                             </h2>
-                            <div class="text-[var(--text)]/70 leading-relaxed space-y-2">
+                            <div class="text-[var(--text-secondary)] leading-relaxed space-y-2">
                                 <p>Usted tiene derecho a:</p>
                                 <ul class="list-disc list-inside space-y-1 ml-4">
                                     <li>Conocer, actualizar y rectificar sus datos personales</li>
@@ -184,14 +184,14 @@
                                 </span>
                                 Compartir Información
                             </h2>
-                            <p class="text-[var(--text)]/70 leading-relaxed">
+                            <p class="text-[var(--text-secondary)] leading-relaxed">
                                 No compartimos su información personal con terceros, excepto cuando sea necesario para
                                 cumplir con obligaciones legales o cuando usted haya dado su consentimiento explícito.
                             </p>
                         </section>
 
                         <!-- Aviso de contacto -->
-                        <div
+                        {{-- <div
                             class="mt-8 p-4 rounded-lg border border-[var(--border)] bg-gradient-to-br from-[var(--border)]/5 to-transparent">
                             <div class="flex items-start gap-3">
                                 <svg class="w-5 h-5 text-[var(--accent)] shrink-0 mt-0.5" fill="none"
@@ -203,7 +203,8 @@
                                     <p class="text-sm font-semibold text-[var(--text)] mb-1">
                                         ¿Tiene preguntas sobre sus datos?
                                     </p>
-                                    <p class="text-xs text-[var(--text)]/70 leading-relaxed">
+
+                                    <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
                                         Para ejercer sus derechos o presentar consultas sobre el tratamiento de datos
                                         personales,
                                         contacte a nuestro oficial de protección de datos en:
@@ -212,15 +213,16 @@
                                             protecciondatos@fesc.edu.co
                                         </a>
                                     </p>
+
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
                 <!-- Footer del documento -->
                 <div class="px-6 sm:px-8 py-4 border-t border-[var(--border)] bg-[var(--border)]/5">
-                    <p class="text-xs text-[var(--text)]/50 text-center">
+                    <p class="text-xs text-[var(--text-secondary)] text-center">
                         FESC se reserva el derecho de actualizar esta política. Los cambios serán notificados
                         oportunamente.
                     </p>

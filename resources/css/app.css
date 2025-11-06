@@ -6,11 +6,18 @@
 @plugin "flowbite/plugin";
 @source "../../node_modules/flowbite";
 
+
+/* /60 → usa var(--text-muted)
+/70 → usa var(--text-secondary)
+/80 o /85 → usa var(--text-secondary) */
+
 /* LIGHT */
 :root,
 :root[data-theme='light']{
     --bg: #EEEEEE;
     --text: #1D1616;
+    --text-secondary: rgba(29, 22, 22, 0.75);
+    --text-muted: rgba(29, 22, 22, 0.65);
     --primary: #8E1616;
     --accent: #D84040;
     --card: rgba(255,255,255,0.90);
@@ -62,6 +69,8 @@
 :root[data-theme='dark']{
     --bg: #1c1515;
     --text: #EEEEEE;
+    --text-secondary: rgba(238, 238, 238, 0.9);
+    --text-muted: rgba(238, 238, 238, 0.75);
     --primary: #8E1616;
     --accent: #D84040;
     --card: #2a2121;

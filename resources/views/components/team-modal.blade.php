@@ -37,7 +37,7 @@
                             <h3 class="text-xl font-bold text-[var(--text)]">
                                 Equipo de Desarrollo
                             </h3>
-                            <p class="text-xs text-[var(--text)]/60 mt-0.5">
+                            <p class="text-xs text-[var(--text-muted)] mt-0.5">
                                 Personas detrás de SystemPOA
                             </p>
                         </div>
@@ -76,7 +76,7 @@
                                 <p class="text-sm text-[var(--accent)] font-medium">
                                     Desarrollador Full Stack
                                 </p>
-                                <p class="text-xs text-[var(--text)]/60 mt-2 leading-relaxed">
+                                <p class="text-xs text-[var(--text-muted)] mt-2 leading-relaxed">
                                     Arquitectura del sistema, desarrollo backend (Laravel) y frontend (Blade, TailwindCSS).
                                 </p>
                             </div>
@@ -103,7 +103,7 @@
                                 <p class="text-sm text-[var(--accent)] font-medium">
                                     Desarrollador Full Stack
                                 </p>
-                                <p class="text-xs text-[var(--text)]/60 mt-2 leading-relaxed">
+                                <p class="text-xs text-[var(--text-muted)] mt-2 leading-relaxed">
                                     Arquitectura del sistema, desarrollo backend (Laravel) y frontend (Blade, TailwindCSS).                                </p>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
                                 <p class="text-sm text-[var(--accent)] font-medium">
                                     Apoyo Unidad De Desarrollo
                                 </p>
-                                <p class="text-xs text-[var(--text)]/60 mt-2 leading-relaxed">
+                                <p class="text-xs text-[var(--text-muted)] mt-2 leading-relaxed">
                                     Documentación.
                                 </p>
                             </div>
@@ -149,7 +149,7 @@
                                 <p class="text-sm font-semibold text-[var(--text)] mb-1">
                                     Agradecimientos especiales
                                 </p>
-                                <p class="text-xs text-[var(--text)]/60 leading-relaxed">
+                                <p class="text-xs text-[var(--text-muted)] leading-relaxed">
                                     A la Fundación de Estudios Superiores Comfanorte (FESC) por su apoyo y confianza en
                                     este proyecto.
                                 </p>

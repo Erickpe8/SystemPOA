@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-3">
-            <a href="{{ route('dashboard') }}" class="text-[var(--text)]/60 hover:text-[var(--accent)] transition-colors">
+            <a href="{{ route('dashboard') }}" class="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -11,7 +11,7 @@
                 <h2 class="font-semibold text-2xl text-[var(--text)] leading-tight">
                     Política del Sistema
                 </h2>
-                <p class="mt-1 text-sm text-[var(--text)]/60">
+                <p class="mt-1 text-sm text-[var(--text-muted)]">
                     Términos y condiciones de uso de SystemPOA
                 </p>
             </div>
@@ -35,7 +35,7 @@
                         </div>
                         <div>
                             <h1 class="text-2xl font-bold text-[var(--text)]">Política del Sistema</h1>
-                            <p class="text-sm text-[var(--text)]/60 mt-1">
+                            <p class="text-sm text-[var(--text-muted)] mt-1">
                                 Última actualización: {{ date('d/m/Y') }}
                             </p>
                         </div>
@@ -54,7 +54,7 @@
                                 </span>
                                 Aceptación de Términos
                             </h2>
-                            <p class="text-[var(--text)]/70 leading-relaxed">
+                            <p class="text-[var(--text-secondary)] leading-relaxed">
                                 Al acceder y utilizar SystemPOA, usted acepta cumplir con estos términos y condiciones.
                                 Este sistema está diseñado exclusivamente para uso institucional dentro de la Fundación
                                 de
@@ -71,7 +71,7 @@
                                 </span>
                                 Uso Autorizado
                             </h2>
-                            <div class="text-[var(--text)]/70 leading-relaxed space-y-2">
+                            <div class="text-[var(--text-secondary)] leading-relaxed space-y-2">
                                 <p>El sistema está destinado únicamente para:</p>
                                 <ul class="list-disc list-inside space-y-1 ml-4">
                                     <li>Gestión de procesos administrativos institucionales</li>
@@ -90,7 +90,7 @@
                                 </span>
                                 Responsabilidades del Usuario
                             </h2>
-                            <div class="text-[var(--text)]/70 leading-relaxed space-y-2">
+                            <div class="text-[var(--text-secondary)] leading-relaxed space-y-2">
                                 <p>Los usuarios se comprometen a:</p>
                                 <ul class="list-disc list-inside space-y-1 ml-4">
                                     <li>Mantener la confidencialidad de sus credenciales de acceso</li>
@@ -110,7 +110,7 @@
                                 </span>
                                 Propiedad Intelectual
                             </h2>
-                            <p class="text-[var(--text)]/70 leading-relaxed">
+                            <p class="text-[var(--text-secondary)] leading-relaxed">
                                 SystemPOA y todo su contenido son propiedad exclusiva de FESC. Queda prohibida la
                                 reproducción, distribución o uso no autorizado del sistema, su código fuente o cualquier
                                 componente del mismo.
@@ -126,7 +126,7 @@
                                 </span>
                                 Limitación de Responsabilidad
                             </h2>
-                            <p class="text-[var(--text)]/70 leading-relaxed">
+                            <p class="text-[var(--text-secondary)] leading-relaxed">
                                 FESC no será responsable por interrupciones del servicio, pérdida de datos o cualquier
                                 daño derivado del uso del sistema, excepto en casos de negligencia comprobada.
                             </p>
@@ -145,7 +145,7 @@
                                     <p class="text-sm font-semibold text-[var(--accent)] mb-1">
                                         Importante
                                     </p>
-                                    <p class="text-xs text-[var(--text)]/70 leading-relaxed">
+                                    <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
                                         El incumplimiento de estas políticas puede resultar en la suspensión o
                                         cancelación
                                         de su cuenta y acciones legales según corresponda.
@@ -158,7 +158,7 @@
 
                 <!-- Footer del documento -->
                 <div class="px-6 sm:px-8 py-4 border-t border-[var(--border)] bg-[var(--border)]/5">
-                    <p class="text-xs text-[var(--text)]/50 text-center">
+                    <p class="text-xs text-[var(--text-secondary)] text-center">
                         Para consultas sobre estas políticas, contacte al administrador del sistema.
                     </p>
                 </div>

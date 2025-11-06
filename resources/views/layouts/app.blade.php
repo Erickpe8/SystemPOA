@@ -17,7 +17,6 @@
 
     <script>
         (function() {
-            // Si hay preferencia guardada, respétela; si no, usar LIGHT por defecto
             const saved = localStorage.getItem('theme') || 'light';
             document.documentElement.dataset.theme = saved;
             document.documentElement.classList.toggle('dark', saved === 'dark');
@@ -44,15 +43,15 @@
                 <div class="lg:hidden sticky top-0 z-20 bg-[var(--card)] border-b border-[var(--border)]">
                     <div class="h-14 px-4 flex items-center justify-between">
                         <button @click="sidebarOpen = true"
-                            class="p-2 rounded-md text-[var(--text)]/60 hover:text-[var(--accent)] hover:bg-[var(--border)]/20 transition-colors"
+                            class="p-2 rounded-md text-[var(--text)] hover:text-[var(--accent)] hover:bg-[var(--border)]/20 transition-colors"
                             aria-label="Abrir menú">
                             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4 6h16M4 12h16M4 18h16" />
                             </svg>
                         </button>
-                        <div class="text-sm text-[var(--text)]/70 truncate">
-                            {{ config('app.name', 'SystemPOA') }}
+                        <div class="text-sm text-[var(--text)] truncate">
+                            SystemPOA
                         </div>
                         <div class="w-10"></div>
                     </div>
