@@ -38,7 +38,7 @@
                            placeholder:text-[color:var(--muted)]
                            focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)]
                            focus:outline-none transition-colors"
-                    placeholder="Juan Pérez" />
+                    placeholder="Santiago Rueda Quintero" />
                 @error('name')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                 @enderror

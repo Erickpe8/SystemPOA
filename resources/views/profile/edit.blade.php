@@ -5,7 +5,7 @@
         <h2 class="font-semibold text-2xl text-[var(--text)] leading-tight">
             Configuración de perfil
         </h2>
-        <p class="mt-1 text-sm text-[var(--text)]/60">
+        <p class="mt-1 text-sm text-[var(--text-muted)]">
             Administra tu información personal y preferencias de cuenta
         </p>
     </x-slot>
