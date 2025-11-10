@@ -66,6 +66,7 @@
     <!-- Modales -->
     @include('usermanagement.partials.modals.approve-user', ['roles' => $roles])
     @include('usermanagement.partials.modals.edit-role', ['roles' => $roles])
+    @include('usermanagement.partials.modals.delete-user')
 
     <!-- Scripts -->
     @push('scripts')

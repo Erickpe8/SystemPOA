@@ -36,7 +36,7 @@
         </div>
 
         <!-- Form -->
-        <form id="approve-form" class="space-y-5" onsubmit="submitApprovalForm(event); return false;">
+        <form id="approve-form" class="space-y-5">
             @csrf
             <input type="hidden" id="approve-user-id" name="user_id">
 
@@ -51,7 +51,7 @@
                                bg-[var(--card)] text-[var(--text)]
                                focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent
                                transition-all appearance-none cursor-pointer">
-                        <option value="" class="text-[var(--text-muted)]">Seleccionar rol...</option>
+                        <option value="">Seleccionar rol...</option>
                         @foreach ($roles as $role)
                             <option value="{{ $role->name }}">{{ ucfirst($role->name) }}</option>
                         @endforeach

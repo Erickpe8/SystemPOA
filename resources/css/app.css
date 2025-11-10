@@ -279,3 +279,31 @@
 :root[data-theme='dark'] .success-text {
     color: #4ade80;
 }
+
+/* Estilos mejorados para select con búsqueda */
+select {
+    background-image: none;
+}
+
+select:focus {
+    outline: none;
+}
+
+/* Personalización del dropdown del select en navegadores webkit */
+select option {
+    padding: 0.5rem 1rem;
+    background-color: var(--card);
+    color: var(--text);
+}
+
+select option:hover,
+select option:checked {
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    color: white;
+}
+
+/* Animación suave para las transiciones */
+.pending-user-card,
+.active-user-row {
+    transition: all 0.3s ease;
+}
