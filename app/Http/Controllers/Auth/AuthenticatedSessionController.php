@@ -27,10 +27,27 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        if (!auth()->user()->is_active) {
+            Auth::logout();
+
+            return redirect()->route('login')
+                ->withErrors(['email' => 'Su cuenta aún no ha sido validada.'])
+                ->with('notify', [
+                    'type' => 'warning',
+                    'message' => 'Su cuenta está pendiente de validación.',
+                ]);
+        }
+
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->intended(RouteServiceProvider::HOME)
+            ->with('notify', [
+                'type' => 'success',
+                'message' => 'Bienvenido(a), ' . auth()->user()->name . '.',
+            ]);
     }
+
+
 
     /**
      * Destroy an authenticated session.
