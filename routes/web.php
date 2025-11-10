@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LegalController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\UserManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,5 +46,21 @@ Route::middleware('auth')->group(function () {
     Route::post('/password/verify', [PasswordController::class, 'verify'])->name('password.verify');
     Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
 });
+/*
+|--------------------------------------------------------------------------
+| CONTROL DE USUARIOS (Solo SuperAdmin)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'verified', 'role:superadmin'])
+    ->prefix('user-management')
+    ->name('user-management.')
+    ->group(function () {
+        Route::get('/', [UserManagementController::class, 'index'])->name('index');
+        Route::post('{user}/approve', [UserManagementController::class, 'approve'])->name('approve');
+        Route::delete('{user}/reject', [UserManagementController::class, 'reject'])->name('reject');
+        Route::patch('{user}/deactivate', [UserManagementController::class, 'deactivate'])->name('deactivate'); 
+        Route::put('{user}/update-role', [UserManagementController::class, 'updateRole'])->name('update-role');
+        Route::delete('{user}', [UserManagementController::class, 'destroy'])->name('destroy');
+    });
 
 require __DIR__.'/auth.php';

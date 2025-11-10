@@ -1,4 +1,4 @@
-<nav x-cloak
+<nav x-cloak x-data="{ userManagementOpen: false }"
     class="fixed inset-y-0 left-0 z-40 w-64
         bg-[var(--card)] text-[var(--text)] border-r border-[var(--border)]
         transform transition-transform duration-200 -translate-x-full lg:translate-x-0
@@ -55,6 +55,85 @@
                 <span>Dashboard</span>
             </x-nav-link>
         </div>
+
+        {{-- ==========================================
+            CONTROL DE USUARIOS (Solo SuperAdmin)
+        ========================================== --}}
+        @if(Auth::user()->hasRole('superadmin'))
+            <div class="pt-2">
+                <p class="uppercase text-[10px] tracking-[0.15em] text-[var(--text)]/50 px-3 mb-2 font-bold">
+                    Administración
+                </p>
+
+                {{-- Dropdown de Control de Usuarios --}}
+                <div class="relative">
+                    <button
+                        @click="userManagementOpen = !userManagementOpen"
+                        class="w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+                            transition-all duration-200 group
+                            {{ request()->routeIs('user-management.*')
+                                ? 'bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] text-white shadow-lg'
+                                : 'hover:bg-[var(--border)]/20 text-[var(--text)]' }}">
+                        <div class="flex items-center gap-3">
+                            {{-- Users icon --}}
+                            <svg class="w-5 h-5 transition-transform duration-200 group-hover:scale-110
+                                    {{ request()->routeIs('user-management.*') ? 'text-white' : 'text-[var(--accent)]' }}"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                            <span>Control de Usuarios</span>
+                        </div>
+                        {{-- Chevron --}}
+                        <svg class="w-4 h-4 transition-transform duration-200"
+                            :class="{ 'rotate-180': userManagementOpen }"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+
+                    {{-- Submenu --}}
+                    <div x-show="userManagementOpen"
+                        x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 -translate-y-1"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 translate-y-0"
+                        x-transition:leave-end="opacity-0 -translate-y-1"
+                        class="mt-2 ml-3 space-y-1 border-l-2 border-[var(--border)] pl-3">
+
+                        {{-- Panel Principal --}}
+                        <a href="{{ route('user-management.index') }}"
+                            class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm
+                                transition-all duration-200 group
+                                {{ request()->routeIs('user-management.index')
+                                    ? 'bg-[var(--primary)]/10 text-[var(--primary)] font-medium'
+                                    : 'hover:bg-[var(--border)]/10 text-[var(--text)]/70' }}">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                            <span>Panel de Control</span>
+                        </a>
+
+                        {{-- Badge de Pendientes --}}
+                        @php
+                            $pendingCount = \App\Models\User::where('is_active', false)->count();
+                        @endphp
+                        @if($pendingCount > 0)
+                            <div class="px-3 py-2 rounded-lg bg-yellow-500/10 border border-yellow-500/20">
+                                <div class="flex items-center gap-2 text-xs">
+                                    <span class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span>
+                                    <span class="text-yellow-600 dark:text-yellow-400 font-medium">
+                                        {{ $pendingCount }} solicitud{{ $pendingCount > 1 ? 'es' : '' }} pendiente{{ $pendingCount > 1 ? 's' : '' }}
+                                    </span>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        @endif
 
         <!-- Módulos -->
         <div class="pt-2">
