@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class User extends Authenticatable
 {
@@ -33,10 +35,17 @@ class User extends Authenticatable
     ];
 
     /**
-     * Define relación con roles de Spatie (por si se requiere acceso directo)
+     * Relación directa con roles (Spatie) solo si la necesitas explícitamente.
+     * Si no, puedes eliminar este método y usar $user->getRoleNames().
      */
-    public function roles()
+    public function roles(): MorphToMany
     {
-        return $this->belongsToMany(\Spatie\Permission\Models\Role::class, 'model_has_roles', 'model_id');
+        return $this->morphToMany(
+            Role::class,
+            'model',
+            config('permission.table_names.model_has_roles', 'model_has_roles'),
+            'model_id',
+            'role_id'
+        );
     }
 }
