@@ -40,7 +40,7 @@
         </div>
 
         <!-- Form -->
-        <form id="edit-role-form" class="space-y-5" onsubmit="submitEditRoleForm(event); return false;">
+        <form id="edit-role-form" class="space-y-5">
             @csrf
             <input type="hidden" id="edit-user-id" name="user_id">
 
