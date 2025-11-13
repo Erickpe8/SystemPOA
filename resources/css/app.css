@@ -5,3 +5,305 @@
 @import "flowbite/src/themes/default";
 @plugin "flowbite/plugin";
 @source "../../node_modules/flowbite";
+
+
+/* /60 → usa var(--text-muted)
+/70 → usa var(--text-secondary)
+/80 o /85 → usa var(--text-secondary) */
+
+/* LIGHT */
+:root,
+:root[data-theme='light']{
+    --bg: #EEEEEE;
+    --text: #1D1616;
+    --text-secondary: rgba(29, 22, 22, 0.75);
+    --text-muted: rgba(29, 22, 22, 0.65);
+    --primary: #8E1616;
+    --accent: #D84040;
+    --card: rgba(255,255,255,0.90);
+    --border: rgba(142,22,22,0.30);
+
+    --brand-red-1: #e30513;
+    --brand-red-2: #9c0f06;
+    --brand-red-3: #630b00;
+    --anthracite: #3c3c3b;
+
+    --gray-0:  #FFFFFF;
+    --gray-10: #E6E6E6;
+
+    --focus: #D84040;
+    --muted: color-mix(in oklab, var(--text) 60%, transparent);
+
+    /* Danger Zone Colors - LIGHT MODE */
+    --danger-border: rgba(254, 202, 202, 0.6);
+    --danger-bg-from: rgba(254, 242, 242, 0.8);
+    --danger-bg-to: rgba(255, 237, 213, 0.3);
+    --danger-decoration-opacity: 0.3;
+    --danger-glow-1: rgba(248, 113, 113, 0.2);
+    --danger-glow-2: rgba(251, 146, 60, 0.2);
+    --danger-icon-bg: linear-gradient(to bottom right, #fee2e2, #fed7aa);
+    --danger-icon-ring: rgba(254, 202, 202, 0.5);
+    --danger-icon-color: #dc2626;
+    --danger-title: #7f1d1d;
+    --danger-description: #b91c1c;
+    --danger-badge-bg: rgba(255, 255, 255, 0.8);
+    --danger-badge-border: #fecaca;
+    --danger-badge-icon: #dc2626;
+    --danger-badge-text: #b91c1c;
+    --danger-toggle-btn: #dc2626;
+    --danger-expanded-bg: rgba(255, 255, 255, 0.9);
+    --danger-expanded-border: #fecaca;
+    --danger-warning-icon: #dc2626;
+    --danger-warning-text: #7f1d1d;
+    --danger-list-title: #991b1b;
+    --danger-item-bg: rgba(254, 242, 242, 0.5);
+    --danger-item-icon: #ef4444;
+    --danger-item-text: #991b1b;
+    --danger-divider: #fecaca;
+    --danger-button-disabled-bg: #e5e5e5;
+    --danger-button-disabled-text: #737373;
+    --danger-button-disabled-border: #d4d4d4;
+}
+
+/* DARK */
+:root[data-theme='dark']{
+    --bg: #1c1515;
+    --text: #EEEEEE;
+    --text-secondary: rgba(238, 238, 238, 0.9);
+    --text-muted: rgba(238, 238, 238, 0.75);
+    --primary: #8E1616;
+    --accent: #D84040;
+    --card: #2a2121;
+    --border: #542828;
+
+    --brand-red-1: #e30513;
+    --brand-red-2: #9c0f06;
+    --brand-red-3: #630b00;
+    --anthracite: #3c3c3b;
+
+    --gray-0:  #FFFFFF;
+    --gray-10: #E6E6E6;
+
+    --focus: #D84040;
+    --muted: color-mix(in oklab, var(--text) 60%, transparent);
+
+    /* Danger Zone Colors - DARK MODE */
+    --danger-border: #542828;
+    --danger-bg-from: #2a2121;
+    --danger-bg-to: #1c1515;
+    --danger-decoration-opacity: 0.15;
+    --danger-glow-1: rgba(216, 64, 64, 0.15);
+    --danger-glow-2: rgba(142, 22, 22, 0.1);
+    --danger-icon-bg: linear-gradient(to bottom right, rgba(216, 64, 64, 0.3), rgba(142, 22, 22, 0.2));
+    --danger-icon-ring: #542828;
+    --danger-icon-color: #D84040;
+    --danger-title: #EEEEEE;
+    --danger-description: rgba(238, 238, 238, 0.7);
+    --danger-badge-bg: #2a2121;
+    --danger-badge-border: #542828;
+    --danger-badge-icon: #D84040;
+    --danger-badge-text: rgba(238, 238, 238, 0.8);
+    --danger-toggle-btn: #D84040;
+    --danger-expanded-bg: #1c1515;
+    --danger-expanded-border: #542828;
+    --danger-warning-icon: #D84040;
+    --danger-warning-text: #EEEEEE;
+    --danger-list-title: rgba(238, 238, 238, 0.9);
+    --danger-item-bg: rgba(84, 40, 40, 0.3);
+    --danger-item-icon: #D84040;
+    --danger-item-text: rgba(238, 238, 238, 0.85);
+    --danger-divider: #542828;
+    --danger-button-disabled-bg: #2a2121;
+    --danger-button-disabled-text: rgba(238, 238, 238, 0.4);
+    --danger-button-disabled-border: #542828;
+}
+
+.theme-bg   { background-color: var(--bg); }
+.theme-text { color:            var(--text); }
+.theme-card { background-color: var(--card); }
+.theme-bd   { border-color:     var(--border); }
+
+/* Danger Zone Specific Styles */
+.danger-zone-border {
+    border-color: var(--danger-border);
+}
+
+.danger-zone-bg {
+    background-image: linear-gradient(to bottom right,
+        var(--danger-bg-from),
+        transparent,
+        var(--danger-bg-to)
+    );
+}
+
+.danger-zone-decoration {
+    opacity: var(--danger-decoration-opacity);
+}
+
+.danger-glow-1 {
+    background-color: var(--danger-glow-1);
+}
+
+.danger-glow-2 {
+    background-color: var(--danger-glow-2);
+}
+
+.danger-icon-bg {
+    background-image: var(--danger-icon-bg);
+}
+
+.danger-icon-ring {
+    ring: 2px solid var(--danger-icon-ring);
+}
+
+.danger-icon-color {
+    color: var(--danger-icon-color);
+}
+
+.danger-title {
+    color: var(--danger-title);
+}
+
+.danger-description {
+    color: var(--danger-description);
+}
+
+.danger-badge-bg {
+    background-color: var(--danger-badge-bg);
+}
+
+.danger-badge-border {
+    border-color: var(--danger-badge-border);
+}
+
+.danger-badge-icon {
+    color: var(--danger-badge-icon);
+}
+
+.danger-badge-text {
+    color: var(--danger-badge-text);
+}
+
+.danger-toggle-btn {
+    color: var(--danger-toggle-btn);
+}
+
+.danger-expanded-bg {
+    background-color: var(--danger-expanded-bg);
+}
+
+.danger-expanded-border {
+    border-color: var(--danger-expanded-border);
+}
+
+.danger-warning-icon {
+    color: var(--danger-warning-icon);
+}
+
+.danger-warning-text {
+    color: var(--danger-warning-text);
+}
+
+.danger-list-title {
+    color: var(--danger-list-title);
+}
+
+.danger-item-bg {
+    background-color: var(--danger-item-bg);
+}
+
+.danger-item-icon {
+    color: var(--danger-item-icon);
+}
+
+.danger-item-text {
+    color: var(--danger-item-text);
+}
+
+.danger-divider {
+    border-top: 1px solid var(--danger-divider);
+}
+
+.danger-button-disabled {
+    background-color: var(--danger-button-disabled-bg);
+    color: var(--danger-button-disabled-text);
+    border: 2px solid var(--danger-button-disabled-border);
+}
+
+/* Verification Warning Styles */
+.verification-warning-bg {
+    background-color: rgba(254, 243, 199, 0.5);
+}
+
+:root[data-theme='dark'] .verification-warning-bg {
+    background-color: rgba(113, 63, 18, 0.2);
+}
+
+.verification-warning-border {
+    border-color: rgba(253, 224, 71, 0.5);
+}
+
+:root[data-theme='dark'] .verification-warning-border {
+    border-color: rgba(161, 98, 7, 0.4);
+}
+
+.verification-warning-icon {
+    color: #ca8a04;
+}
+
+:root[data-theme='dark'] .verification-warning-icon {
+    color: #fbbf24;
+}
+
+.verification-warning-text {
+    color: #92400e;
+}
+
+:root[data-theme='dark'] .verification-warning-text {
+    color: #fde68a;
+}
+
+.verification-warning-link {
+    color: #a16207;
+}
+
+:root[data-theme='dark'] .verification-warning-link {
+    color: #fbbf24;
+}
+
+/* Success Text */
+.success-text {
+    color: #16a34a;
+}
+
+:root[data-theme='dark'] .success-text {
+    color: #4ade80;
+}
+
+/* Estilos mejorados para select con búsqueda */
+select {
+    background-image: none;
+}
+
+select:focus {
+    outline: none;
+}
+
+/* Personalización del dropdown del select en navegadores webkit */
+select option {
+    padding: 0.5rem 1rem;
+    background-color: var(--card);
+    color: var(--text);
+}
+
+select option:hover,
+select option:checked {
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    color: white;
+}
+
+/* Animación suave para las transiciones */
+.pending-user-card,
+.active-user-row {
+    transition: all 0.3s ease;
+}
