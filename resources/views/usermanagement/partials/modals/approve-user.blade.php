@@ -1,10 +1,9 @@
 {{-- resources/views/usermanagement/partials/modals/approve-user.blade.php --}}
-<x-modal name="approve-user-modal" :show="false">
-    <div class="p-6">
+<x-modal name="approve-user-modal" :show="false" maxWidth="2xl">
+    <div class="p-6 bg-[var(--card)]">
         <!-- Header -->
         <div class="flex items-start gap-4 mb-6">
-            <div
-                class="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-600
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-600
                         flex items-center justify-center shrink-0">
                 <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -18,6 +17,13 @@
                     Asigna un rol y área al nuevo usuario
                 </p>
             </div>
+            <button type="button"
+                @click="show = false"
+                class="text-[var(--text-muted)] hover:text-[var(--text)] transition-colors">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
         </div>
 
         <!-- User Info Card -->
@@ -29,8 +35,8 @@
                     ?
                 </div>
                 <div>
-                    <p class="font-semibold text-[var(--text)]" id="approve-user-name"></p>
-                    <p class="text-sm text-[var(--text-muted)]" id="approve-user-email"></p>
+                    <p class="font-semibold text-[var(--text)]" id="approve-user-name">Nombre del Usuario</p>
+                    <p class="text-sm text-[var(--text-muted)]" id="approve-user-email">email@ejemplo.com</p>
                 </div>
             </div>
         </div>
@@ -86,7 +92,8 @@
 
             <!-- Actions -->
             <div class="flex flex-col-reverse sm:flex-row gap-3 justify-end pt-4 border-t border-[var(--border)]">
-                <button type="button" onclick="closeModal('approve-user-modal')"
+                <button type="button"
+                    @click="show = false"
                     class="px-5 py-2.5 rounded-lg border border-[var(--border)]
                            text-[var(--text)] bg-[var(--card)]
                            hover:bg-[var(--border)]/10 transition-all font-medium">

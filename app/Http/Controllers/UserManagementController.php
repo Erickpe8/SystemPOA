@@ -12,17 +12,57 @@ use Illuminate\Support\Facades\DB;
 class UserManagementController extends Controller
 {
     /**
-     * Mostrar panel principal de gestión de usuarios
+     * Mostrar panel principal de gestión de usuarios con paginación
      */
-    public function index()
+    public function index(Request $request)
     {
         // Solo SuperAdmin puede acceder
         if (!auth()->user()->hasRole('superadmin')) {
             abort(403, 'No tienes permisos para acceder a esta sección.');
         }
 
-        $pendingUsers = User::where('is_active', false)->get();
-        $activeUsers = User::where('is_active', true)->with('roles')->get();
+        // Parámetros de paginación y búsqueda
+        $pendingPerPage = $request->get('pending_per_page', 10);
+        $activePerPage = $request->get('active_per_page', 10);
+        $pendingSearch = $request->get('pending_search', '');
+        $activeSearch = $request->get('active_search', '');
+        $activeRoleFilter = $request->get('active_role', '');
+
+        // Query para usuarios pendientes con búsqueda
+        $pendingQuery = User::where('is_active', false);
+
+        if ($pendingSearch) {
+            $pendingQuery->where(function($q) use ($pendingSearch) {
+                $q->where('name', 'like', "%{$pendingSearch}%")
+                  ->orWhere('email', 'like', "%{$pendingSearch}%");
+            });
+        }
+
+        $pendingUsers = $pendingQuery->orderBy('created_at', 'desc')
+                                    ->paginate($pendingPerPage, ['*'], 'pending_page')
+                                    ->withQueryString();
+
+        // Query para usuarios activos con búsqueda y filtros
+        $activeQuery = User::where('is_active', true)->with('roles');
+
+        if ($activeSearch) {
+            $activeQuery->where(function($q) use ($activeSearch) {
+                $q->where('name', 'like', "%{$activeSearch}%")
+                  ->orWhere('email', 'like', "%{$activeSearch}%")
+                  ->orWhere('area', 'like', "%{$activeSearch}%");
+            });
+        }
+
+        if ($activeRoleFilter) {
+            $activeQuery->whereHas('roles', function($q) use ($activeRoleFilter) {
+                $q->where('name', $activeRoleFilter);
+            });
+        }
+
+        $activeUsers = $activeQuery->orderBy('created_at', 'desc')
+                                  ->paginate($activePerPage, ['*'], 'active_page')
+                                  ->withQueryString();
+
         $roles = Role::all();
 
         return view('usermanagement.managemet', compact('pendingUsers', 'activeUsers', 'roles'));
@@ -34,7 +74,6 @@ class UserManagementController extends Controller
     public function approve(Request $request, User $user)
     {
         try {
-            // Verificar permisos
             if (!auth()->user()->hasRole('superadmin')) {
                 Log::warning('Intento de acceso no autorizado a approve', [
                     'user_id' => auth()->id(),
@@ -43,7 +82,6 @@ class UserManagementController extends Controller
                 return response()->json(['error' => 'No autorizado'], 403);
             }
 
-            // Validar datos
             $validated = $request->validate([
                 'role' => 'required|exists:roles,name',
                 'area' => 'nullable|string|max:255',
@@ -57,20 +95,15 @@ class UserManagementController extends Controller
                 'before_is_active' => $user->is_active
             ]);
 
-            // Usar transacción para asegurar consistencia
             DB::beginTransaction();
 
             try {
-                // Activar usuario y asignar datos
                 $user->is_active = true;
                 $user->role_name = $validated['role'];
                 $user->area = $validated['area'];
                 $user->save();
 
-                // Asignar rol de Spatie
                 $user->syncRoles([$validated['role']]);
-
-                // Refrescar modelo para obtener datos actualizados
                 $user->refresh();
                 $user->load('roles');
 
@@ -173,42 +206,52 @@ class UserManagementController extends Controller
             $validated = $request->validate([
                 'role' => 'required|exists:roles,name',
                 'area' => 'nullable|string|max:255',
+                'is_active' => 'required|boolean',
             ]);
 
-            Log::info('Actualizando rol de usuario', [
+            Log::info('Actualizando usuario', [
                 'user_id' => $user->id,
                 'old_role' => $user->role_name,
                 'new_role' => $validated['role'],
                 'old_area' => $user->area,
-                'new_area' => $validated['area'] ?? null
+                'new_area' => $validated['area'] ?? null,
+                'old_is_active' => $user->is_active,
+                'new_is_active' => $validated['is_active']
             ]);
 
             DB::beginTransaction();
 
             try {
+                // Actualizar datos del usuario
                 $user->role_name = $validated['role'];
                 $user->area = $validated['area'];
+                $user->is_active = $validated['is_active'];
                 $user->save();
 
+                // Sincronizar roles
                 $user->syncRoles([$validated['role']]);
                 $user->refresh();
                 $user->load('roles');
 
                 DB::commit();
 
-                Log::info('Rol actualizado exitosamente', [
+                $statusMessage = $validated['is_active'] ? 'activado' : 'desactivado';
+
+                Log::info('Usuario actualizado exitosamente', [
                     'user_id' => $user->id,
-                    'roles' => $user->roles->pluck('name')->toArray()
+                    'roles' => $user->roles->pluck('name')->toArray(),
+                    'is_active' => $user->is_active
                 ]);
 
                 return response()->json([
                     'success' => true,
-                    'message' => "Rol de {$user->name} actualizado correctamente.",
+                    'message' => "Usuario {$user->name} actualizado correctamente. Estado: {$statusMessage}.",
                     'user' => [
                         'id' => $user->id,
                         'name' => $user->name,
                         'role_name' => $user->role_name,
                         'area' => $user->area,
+                        'is_active' => $user->is_active,
                         'roles' => $user->roles->pluck('name')
                     ]
                 ], 200);
@@ -225,12 +268,12 @@ class UserManagementController extends Controller
             ], 422);
 
         } catch (\Exception $e) {
-            Log::error('Error al actualizar rol', [
+            Log::error('Error al actualizar usuario', [
                 'user_id' => $user->id,
                 'error' => $e->getMessage()
             ]);
             return response()->json([
-                'error' => 'Error al actualizar rol: ' . $e->getMessage()
+                'error' => 'Error al actualizar usuario: ' . $e->getMessage()
             ], 500);
         }
     }
@@ -279,7 +322,6 @@ class UserManagementController extends Controller
                 return response()->json(['error' => 'No autorizado'], 403);
             }
 
-            // No permitir eliminar al propio usuario
             if ($user->id === auth()->id()) {
                 return response()->json([
                     'error' => 'No puedes eliminarte a ti mismo.'

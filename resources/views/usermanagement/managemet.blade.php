@@ -31,7 +31,6 @@
                 <div
                     class="group relative overflow-hidden rounded-xl border border-[var(--border)]
                             bg-[var(--card)] shadow-sm hover:shadow-lg transition-all duration-300">
-                    <!-- Decoración sutil -->
                     <div
                         class="absolute top-0 right-0 w-40 h-40 bg-yellow-500/10 rounded-full blur-3xl -mr-20 -mt-20
                                 group-hover:bg-yellow-500/15 transition-colors duration-500">
@@ -48,7 +47,6 @@
                 <div
                     class="group relative overflow-hidden rounded-xl border border-[var(--border)]
                             bg-[var(--card)] shadow-sm hover:shadow-lg transition-all duration-300">
-                    <!-- Decoración sutil -->
                     <div
                         class="absolute bottom-0 left-0 w-40 h-40 bg-green-500/10 rounded-full blur-3xl -ml-20 -mb-20
                                 group-hover:bg-green-500/15 transition-colors duration-500">
@@ -65,6 +63,7 @@
 
     <!-- Modales -->
     @include('usermanagement.partials.modals.approve-user', ['roles' => $roles])
+    @include('usermanagement.partials.modals.reject-user')
     @include('usermanagement.partials.modals.edit-role', ['roles' => $roles])
     @include('usermanagement.partials.modals.delete-user')
 

@@ -13,10 +13,10 @@
             </div>
             <div class="flex-1">
                 <h3 class="text-xl font-bold text-[var(--text)] mb-1">
-                    Cambiar Rol de Usuario
+                    Gestionar Usuario
                 </h3>
                 <p class="text-sm text-[var(--text-muted)]">
-                    Actualiza el rol y área del usuario existente
+                    Actualiza el rol, área y estado del usuario
                 </p>
             </div>
         </div>
@@ -29,20 +29,64 @@
                     id="edit-user-avatar">
                     ?
                 </div>
-                <div>
+                <div class="flex-1">
                     <p class="font-semibold text-[var(--text)]" id="edit-user-name"></p>
                     <div class="flex items-center gap-2 mt-1">
                         <span class="text-xs text-[var(--text-muted)]">Rol actual:</span>
                         <span class="text-xs font-medium text-[var(--primary)]" id="edit-current-role"></span>
                     </div>
                 </div>
+                <!-- Estado Badge -->
+                <div id="edit-user-status-badge"></div>
             </div>
         </div>
 
         <!-- Form -->
-        <form id="edit-role-form" class="space-y-5">
+        <form id="edit-role-form" class="space-y-5" onsubmit="submitEditRoleForm(event); return false;">
             @csrf
             <input type="hidden" id="edit-user-id" name="user_id">
+
+            <!-- Estado del Usuario (Toggle) -->
+            <div class="p-4 rounded-lg border-2 border-[var(--border)] bg-[var(--card)]">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500/20 to-purple-600/10
+                                    flex items-center justify-center">
+                            <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <label for="edit-is-active" class="block text-sm font-semibold text-[var(--text)]">
+                                Estado del Usuario
+                            </label>
+                            <p class="text-xs text-[var(--text-muted)] mt-0.5">
+                                Activa o desactiva el acceso del usuario al sistema
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Toggle Switch -->
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="edit-is-active" name="is_active" class="sr-only peer" checked>
+                        <div
+                            class="w-14 h-7 bg-gray-300 dark:bg-gray-600 rounded-full peer
+                                    peer-checked:after:translate-x-full peer-checked:after:border-white
+                                    after:content-[''] after:absolute after:top-0.5 after:left-[4px]
+                                    after:bg-white after:border-gray-300 after:border after:rounded-full
+                                    after:h-6 after:w-6 after:transition-all
+                                    peer-checked:bg-gradient-to-r peer-checked:from-green-500 peer-checked:to-emerald-600
+                                    transition-all duration-200">
+                        </div>
+                        <span class="ml-3 text-sm font-medium" id="edit-status-label">
+                            <span class="text-green-600 dark:text-green-400">Activo</span>
+                        </span>
+                    </label>
+                </div>
+            </div>
 
             <!-- Nuevo Rol -->
             <div>
@@ -96,7 +140,7 @@
                         clip-rule="evenodd" />
                 </svg>
                 <p class="text-xs text-blue-700 dark:text-blue-300 leading-relaxed">
-                    El cambio de rol afectará inmediatamente los permisos y accesos del usuario.
+                    Los cambios afectarán inmediatamente los permisos y accesos del usuario.
                 </p>
             </div>
 
@@ -115,9 +159,29 @@
                     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>Actualizar Rol</span>
+                    <span>Guardar Cambios</span>
                 </button>
             </div>
         </form>
     </div>
 </x-modal>
+
+<script>
+    // Toggle del estado activo con actualización visual
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleCheckbox = document.getElementById('edit-is-active');
+        const statusLabel = document.getElementById('edit-status-label');
+
+        if (toggleCheckbox && statusLabel) {
+            toggleCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    statusLabel.innerHTML =
+                        '<span class="text-green-600 dark:text-green-400 font-semibold">Activo</span>';
+                } else {
+                    statusLabel.innerHTML =
+                        '<span class="text-red-600 dark:text-red-400 font-semibold">Inactivo</span>';
+                }
+            });
+        }
+    });
+</script>

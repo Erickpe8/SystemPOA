@@ -1,10 +1,9 @@
 {{-- resources/views/usermanagement/partials/modals/delete-user.blade.php --}}
-<x-modal name="delete-user-modal" :show="false">
+<x-modal name="delete-user-modal" :show="false" maxWidth="lg">
     <div class="p-6">
         <!-- Header -->
         <div class="flex items-start gap-4 mb-6">
-            <div
-                class="w-12 h-12 rounded-full bg-gradient-to-br from-red-600 to-red-700
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-red-600 to-red-700
                         flex items-center justify-center shrink-0 animate-pulse">
                 <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -30,8 +29,8 @@
                     ?
                 </div>
                 <div>
-                    <p class="font-semibold text-[var(--text)]" id="delete-user-name"></p>
-                    <p class="text-xs text-[var(--text-muted)]">Usuario activo</p>
+                    <p class="font-semibold text-[var(--text)]" id="delete-user-name">Nombre del usuario</p>
+                    <p class="text-xs text-[var(--text-muted)]" id="delete-user-email">email@example.com</p>
                 </div>
             </div>
         </div>
@@ -77,20 +76,24 @@
             </ul>
         </div>
 
+        <!-- Hidden field para user ID -->
         <input type="hidden" id="delete-user-id">
 
         <!-- Actions -->
         <div class="flex flex-col-reverse sm:flex-row gap-3 justify-end">
-            <button type="button" onclick="closeModal('delete-user-modal')"
-                class="px-5 py-2.5 rounded-lg border border-[var(--border)]
-                       text-[var(--text)] bg-[var(--card)]
-                       hover:bg-[var(--border)]/10 transition-all font-medium">
+            <button type="button"
+                    onclick="closeModal('delete-user-modal')"
+                    class="px-5 py-2.5 rounded-lg border border-[var(--border)]
+                           text-[var(--text)] bg-[var(--card)]
+                           hover:bg-[var(--border)]/10 transition-all font-medium">
                 Cancelar
             </button>
-            <button type="button" onclick="confirmDeleteUser()"
-                class="px-6 py-2.5 rounded-lg bg-gradient-to-r from-red-600 to-red-700
-                       text-white font-semibold hover:shadow-lg hover:scale-[1.02]
-                       active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+            <button type="button"
+                    id="delete-confirm-btn"
+                    onclick="confirmDeleteUser()"
+                    class="px-6 py-2.5 rounded-lg bg-gradient-to-r from-red-600 to-red-700
+                           text-white font-semibold hover:shadow-lg hover:scale-[1.02]
+                           active:scale-[0.98] transition-all flex items-center justify-center gap-2">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
